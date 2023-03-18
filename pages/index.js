@@ -1,5 +1,5 @@
-
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -24,7 +24,8 @@ export default function Home() {
     const newWindow = window.open(
       url,
       title,
-      `width=${500 / systemZoom},height=${550 / systemZoom
+      `width=${500 / systemZoom},height=${
+        550 / systemZoom
       },top=${top},left=${left}`
     );
 
@@ -34,28 +35,27 @@ export default function Home() {
   if (status === "authenticated") {
     return (
       <div>
-
-        < h2 > Welcome {session.user.email} 😀</h2 >
+        <h2> Welcome {session.user.email} 😀</h2>
         <button onClick={() => signOut()}>Sign out</button>
       </div>
-    )
-  }
-  else if (status === "unauthenticated") {
+    );
+  } else if (status === "unauthenticated") {
     return (
-
       <div>
-
-        <h2>Please Login</h2>
-        <button onClick={() => popupCenter("/google-signin", "Sample Sign In")} >
+        <Link href="/login">Go to Login page to login with NewWindow</Link>
+        <h2>OR please pogin here with custom popup</h2>
+        <button
+          onClick={() => popupCenter("/auth/google-signin", "Sample Sign In")}
+        >
           Sign In with Google
         </button>
       </div>
-    )
+    );
   }
 
   return (
     <div>
       <h1>Loading...</h1>
     </div>
-  )
+  );
 }
