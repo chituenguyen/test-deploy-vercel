@@ -27,6 +27,7 @@ const SignInPage = () => {
             width={50}
             height={50}
           />
+          <span>{session.user?.name}</span>
         </div>
       ) : (
         <div>
