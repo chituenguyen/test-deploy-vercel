@@ -14,7 +14,7 @@ export default function Home() {
     );
   } else if (status === "unauthenticated") {
     return (
-      <div>
+      <div className="flex flex-col">
         <Link href="/login">Go to Login page to login with NewWindow</Link>
         <h2>OR please pogin here with custom popup</h2>
         <button
@@ -23,6 +23,13 @@ export default function Home() {
           }
         >
           Sign In with Google
+        </button>
+        <button
+          onClick={() =>
+            popupCenter("/auth/facebook-signin-popup", "Sample Sign In")
+          }
+        >
+          Sign In with Facebook
         </button>
       </div>
     );
