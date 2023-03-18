@@ -5,47 +5,56 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SignInPage = () => {
-  const [popup, setPopUp] = useState(false);
+  const [popupGoogle, setPopUpGoogle] = useState(false);
+  const [popupFB, setPopUpFB] = useState(false);
   const { data: session, status } = useSession();
 
   return (
-    <div className="flex gap-4">
-      <div className="border border-solid ">
-        <Link href="/" className="cursor-pointer">
-          Go Home
-        </Link>
-      </div>
+    <div className="">
+      <Link href="/">Go Home</Link>
 
-      <div>
-        {status === "loading" ? (
-          <p>loading session...</p>
-        ) : session ? (
-          <div className="flex items-center">
-            <button onClick={() => signOut()}>Logout</button>
-            <Image
-              src={session.user?.image}
-              alt="Avatar"
-              width={50}
-              height={50}
-            />
-          </div>
-        ) : (
+      {status === "loading" ? (
+        <p>loading session...</p>
+      ) : session ? (
+        <div className="flex items-center">
+          <button onClick={() => signOut()}>Logout</button>
+          <Image
+            src={session.user?.image}
+            alt="Avatar"
+            width={50}
+            height={50}
+          />
+        </div>
+      ) : (
+        <div>
           <button
             onClick={async () => {
-              await setPopUp(false); // looks like some bug of new-react-window -> need this trick
-              setPopUp(true);
+              await setPopUpGoogle(false); // looks like some bug of new-react-window -> need this trick
+              setPopUpGoogle(true);
             }}
           >
             Login with Google
           </button>
-        )}
-      </div>
+          <button
+            onClick={async () => {
+              await setPopUpFB(false); // looks like some bug of new-react-window -> need this trick
+              setPopUpFB(true);
+            }}
+          >
+            Login with Facebook
+          </button>
+        </div>
+      )}
 
-      {!session && popup ? (
+      {!session && popupGoogle ? (
         <NewWindow
           url="/auth/google-signin-popup"
           // onUnload={() => setPopUp(false)}  // doens't work
         />
+      ) : null}
+
+      {!session && popupFB ? (
+        <NewWindow url="/auth/facebook-signin-popup" />
       ) : null}
     </div>
   );
