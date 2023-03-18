@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewWindow from "react-new-window";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const SignInPage = () => {
   const [popup, setPopUp] = useState(false);
@@ -22,11 +23,21 @@ const SignInPage = () => {
           />
         </div>
       ) : (
-        <button onClick={() => setPopUp(true)}>Login with Google</button>
+        <button
+          onClick={async () => {
+            await setPopUp(false); // looks like some bug of new-react-window -> need this trick
+            setPopUp(true);
+          }}
+        >
+          Login with Google
+        </button>
       )}
 
-      {popup && !session ? (
-        <NewWindow center={true} url="/auth/google-signin" />
+      {!session && popup ? (
+        <NewWindow
+          url="/auth/google-signin-popup"
+          // onUnload={() => setPopUp(false)}  // doens't work
+        />
       ) : null}
     </div>
   );

@@ -45,7 +45,9 @@ export default function Home() {
         <Link href="/login">Go to Login page to login with NewWindow</Link>
         <h2>OR please pogin here with custom popup</h2>
         <button
-          onClick={() => popupCenter("/auth/google-signin", "Sample Sign In")}
+          onClick={() =>
+            popupCenter("/auth/google-signin-popup", "Sample Sign In")
+          }
         >
           Sign In with Google
         </button>
