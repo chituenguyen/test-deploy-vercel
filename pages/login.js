@@ -9,29 +9,37 @@ const SignInPage = () => {
   const { data: session, status } = useSession();
 
   return (
-    <div>
-      {status === "loading" ? (
-        <p>loading session...</p>
-      ) : session ? (
-        <div className="flex items-center">
-          <button onClick={() => signOut()}>Logout</button>
-          <Image
-            src={session.user?.image}
-            alt="Avatar"
-            width={50}
-            height={50}
-          />
-        </div>
-      ) : (
-        <button
-          onClick={async () => {
-            await setPopUp(false); // looks like some bug of new-react-window -> need this trick
-            setPopUp(true);
-          }}
-        >
-          Login with Google
-        </button>
-      )}
+    <div className="flex gap-4">
+      <div className="border border-solid ">
+        <Link href="/" className="cursor-pointer">
+          Go Home
+        </Link>
+      </div>
+
+      <div>
+        {status === "loading" ? (
+          <p>loading session...</p>
+        ) : session ? (
+          <div className="flex items-center">
+            <button onClick={() => signOut()}>Logout</button>
+            <Image
+              src={session.user?.image}
+              alt="Avatar"
+              width={50}
+              height={50}
+            />
+          </div>
+        ) : (
+          <button
+            onClick={async () => {
+              await setPopUp(false); // looks like some bug of new-react-window -> need this trick
+              setPopUp(true);
+            }}
+          >
+            Login with Google
+          </button>
+        )}
+      </div>
 
       {!session && popup ? (
         <NewWindow
