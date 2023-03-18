@@ -9,6 +9,9 @@ const SignInPage = () => {
   const [popupFB, setPopUpFB] = useState(false);
   const { data: session, status } = useSession();
 
+  if (session) {
+    console.log(session);
+  }
   return (
     <div className="">
       <Link href="/">Go Home</Link>
