@@ -25,7 +25,7 @@ export default function Home() {
   } else if (status === "unauthenticated") {
     return (
       <div className="flex flex-col">
-        <Link href="/login">Go to Login page to login with NewWindow deploy google2</Link>
+        <Link href="/login">Go to Login page to login with NewWindow deploy google3</Link>
         <h2>OR please login here with custom popup</h2>
         <button
           onClick={() => popupCenter("/auth/google-signin-popup", "Sample Sign In")}
