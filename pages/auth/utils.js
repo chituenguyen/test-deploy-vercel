@@ -17,12 +17,9 @@ const popupCenter = (url, title) => {
     screen.height;
 
   const systemZoom = width / window.screen.availWidth;
-  // 500 and 550 is width and height of pop up
 
-  const left = (width - 500 / systemZoom) / 2 + dualScreenLeft;
-  const top = (height + 550 - 550 / systemZoom) / 2 + dualScreenTop;
-
-  console.log(dualScreenLeft, dualScreenTop, width, height, systemZoom);
+  const left = (width - 500/ systemZoom) / 2  + dualScreenLeft;
+  const top = (height - 550/ systemZoom +550) / 2 + dualScreenTop;
 
   const newWindow = window.open(
     url,
