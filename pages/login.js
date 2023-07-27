@@ -33,14 +33,16 @@ const SignInPage = () => {
         <div>
           <button
             onClick={async () => {
-              window.open("http://localhost:3000/auth/google-signin-popup")
+              await setPopUpGoogle(false); // looks like some bug of new-react-window -> need this trick
+              setPopUpGoogle(true);
             }}
           >
             Login with Google
           </button>
           <button
             onClick={async () => {
-              window.open("http://localhost:3000/auth/facebook-signin-popup")
+              await setPopUpFB(false); // looks like some bug of new-react-window -> need this trick
+              setPopUpFB(true);
             }}
           >
             Login with Facebook
