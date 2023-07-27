@@ -1,4 +1,7 @@
 const popupCenter = (url, title) => {
+  if(typeof window === 'undefined'){
+    return null;
+  }
   const dualScreenLeft = window.screenLeft ?? window.screenX;
   const dualScreenTop = window.screenTop ?? window.screenY;
 
