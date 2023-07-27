@@ -1,7 +1,10 @@
 const popupCenter = (url, title) => {
-  if(typeof window === 'undefined'){
-    return null;
+  if (typeof window === "undefined") {
+    // in case this code is run in SSR mode, at server -> error
+    // Nếu đối tượng window không tồn tại, không thực thi mã
+    return;
   }
+
   const dualScreenLeft = window.screenLeft ?? window.screenX;
   const dualScreenTop = window.screenTop ?? window.screenY;
 
@@ -14,6 +17,7 @@ const popupCenter = (url, title) => {
     screen.height;
 
   const systemZoom = width / window.screen.availWidth;
+  // 500 and 550 is width and height of pop up
 
   const left = (width - 500 / systemZoom) / 2 + dualScreenLeft;
   const top = (height + 550 - 550 / systemZoom) / 2 + dualScreenTop;
