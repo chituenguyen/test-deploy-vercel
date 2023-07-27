@@ -1,13 +1,38 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import popupCenter from "./auth/utils";
+// import popupCenter from "./auth/utils";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const { data: session, status } = useSession();
+  const popupCenter = (url, title) => {
+    const dualScreenLeft = window.screenLeft ?? window.screenX;
+    const dualScreenTop = window.screenTop ?? window.screenY;
+    const width =
+      window.innerWidth ?? document.documentElement.clientWidth ?? screen.width;
 
+    const height =
+      window.innerHeight ??
+      document.documentElement.clientHeight ??
+      screen.height;
+
+    const systemZoom = width / window.screen.availWidth;
+
+    const left = (width - 500) / 2 / systemZoom + dualScreenLeft;
+    const top = (height - 550) / 2 / systemZoom + dualScreenTop;
+
+    const newWindow = window.open(
+      url,
+      title,
+      `width=${500 / systemZoom},height=${550 / systemZoom
+      },top=${top},left=${left}`
+    );
+
+    newWindow?.focus();
+  };
+  // toast to notify the user login successfully
   useEffect(() => {
     if (status === "authenticated") {
       toast.success("Login successful!");
@@ -17,7 +42,7 @@ export default function Home() {
   if (status === "authenticated") {
     return (
       <div>
-        <ToastContainer /> {/* Ensure this component is here */}
+        <ToastContainer />
         <h2> Welcome {session.user.email} 😀</h2>
         <button onClick={() => signOut()}>Sign out</button>
       </div>
@@ -43,7 +68,7 @@ export default function Home() {
 
   return (
     <div>
-      <ToastContainer /> {/* Ensure this component is here */}
+      <ToastContainer />
       <h1>Loading...</h1>
     </div>
   );

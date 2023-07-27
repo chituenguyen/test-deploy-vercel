@@ -12,12 +12,12 @@ const SignInPage = () => {
     return (
         <div
             style={{
-                width: "100vw",
-                height: "100vh",
+                width: "90vw",
+                height: "90vh",
                 position: "absolute",
                 left: 0,
                 top: 0,
-                background: "white",
+                background: "red",
             }}
         ></div>
     );
