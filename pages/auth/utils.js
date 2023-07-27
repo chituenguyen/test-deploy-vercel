@@ -1,9 +1,4 @@
 const popupCenter = (url, title) => {
-  if (typeof window === "undefined") {
-    // in case this code is run in SSR mode, at server -> error
-    // Nếu đối tượng window không tồn tại, không thực thi mã
-    return;
-  }
 
   const dualScreenLeft = window.screenLeft ?? window.screenX;
   const dualScreenTop = window.screenTop ?? window.screenY;
@@ -24,10 +19,9 @@ const popupCenter = (url, title) => {
   const newWindow = window.open(
     url,
     title,
-    `width=${500 / systemZoom},height=${
-      550 / systemZoom
-    },top=${top},left=${left}`
+    'width=500px,height=500px'
   );
+  
 
   newWindow?.focus();
 };
